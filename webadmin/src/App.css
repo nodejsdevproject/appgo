@@ -1,28 +1,38 @@
-.App {
-  text-align: center;
-}
-
+/* This file will control the main layout of the APP. The detailed css will be controlled by the bootstrap. */
 .App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 80px;
+    height: 40px;
 }
 
 .App-header {
-  background-color: #222;
-  height: 150px;
-  padding: 20px;
-  color: white;
+  position:fixed;
+  top:0;
+  width:100%;
+  height:60px;
+}
+
+.App-footer {
+  width: 100%;
+  bottom: 0;
+  height: 20px;
+  position: fixed;
+}
+
+.App-leftmenu {
+  width: 300px;
+  bottom: 20px;
+  top: 60px;
+  left: 0px;
+  position: fixed;
+}
+
+.App-rightcontent {
+  width:  calc(100% - 300px);
+  bottom: 20px;
+  top: 60px;
+  right: 0px;
+  position: fixed;
 }
 
 .App-title {
   font-size: 1.5em;
-}
-
-.App-intro {
-  font-size: large;
-}
-
-@keyframes App-logo-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
 }
