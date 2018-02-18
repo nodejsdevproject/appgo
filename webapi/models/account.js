@@ -3,9 +3,12 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 // create a schema. This will contain all object we need for the client to create the app.
-var appConfigSchema = new Schema({
-  appName: String,
-  appLogo: String, // Store Base64 string
+var accountSchema = new Schema({
+  name: String,
+  isSystem: Boolean,
+  isActive: Boolean,
+  createDate: Date,
+  updateDate: Date
 });
 
 // custom method to add string to end of name
@@ -20,8 +23,7 @@ var appConfigSchema = new Schema({
 
 // the schema is useless so far
 // we need to create a model using it
-var AppConfig = mongoose.model('AppConfig', appConfigSchema);
-
+var Account = mongoose.model('Account', accountSchema);
 
 // make this available to our users in our Node applications
-module.exports = AppConfig;
+module.exports = Account;

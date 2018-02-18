@@ -13,25 +13,25 @@ class App extends Component {
     super();
     this.state = {
       // Here to store all model
-      appModel: {}
+      appConfig: {}
     }
   }
 
   componentWillMount() {
-    this.state.appModel.header = "test";
+    this.state.appConfig.header = "test";
     console.log("Will Mount1");
   }
 
   componentDidMount() {
     // hide the show dailog
-    this.state.appModel.header = "test";
+    this.state.appConfig.header = "test";
     console.log("Mounted");
   }
 
   render() {
     return (
       <div className="App">
-        <AppHeader header={this.state.appModel.header} />
+        <AppHeader header={this.state.appConfig.header} />
         <AppLeftmenu />
         <AppRightcontent />
         <AppFooter />
