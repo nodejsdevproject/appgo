@@ -1,13 +1,18 @@
 import React, { Component } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import logo from '../logo.svg';
 import '../App.css';
 class AppHeader extends Component {
+
+  constructor()
+  {
+    super();
+  }
+
   render() {
-    console.log(this.props.header);
+    console.log("test" + this.props.Config.appLogo);
     return (
       <div className="App-header bg-dark">
-          <img src={logo} className="App-logo" alt="logo" />
+          <img src={this.props.Config.appLogo} className="App-logo" alt="logo" />
       </div>
     );
   }
