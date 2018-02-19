@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import 'bootstrap/dist/css/bootstrap.min.css';
 import '../App.css';
 import 'react-sidemenu/dist/react-sidemenu.min.css'
 import {SideMenu} from "react-sidemenu"
@@ -10,7 +9,7 @@ class AppLeftmenu extends Component {
 
         this.state = {
             items : [
-                { divider: true, label: 'Main navigation', value: 'main-nav' },
+                { divider: true, label: '系统管理', value: 'main-nav' },
                 {
                     label: 'item 1', value: 'item1', icon: 'fa-search',
                     children: [
@@ -42,7 +41,7 @@ class AppLeftmenu extends Component {
     render() {
         return (
             <div className="App-leftmenu">
-                <SideMenu items={this.state.items} />
+                <SideMenu items={this.state.items} theme='custom' />
             </div>
         );
     }
