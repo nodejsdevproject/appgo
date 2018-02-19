@@ -6,7 +6,6 @@ import {SideMenu} from "react-sidemenu"
 class AppLeftmenu extends Component {
     constructor() {
         super();
-
         this.state = {
             items : [
                 { divider: true, label: '系统管理', value: 'main-nav' },
@@ -38,10 +37,16 @@ class AppLeftmenu extends Component {
         }
     }
 
+    MenuClicked(item)
+    {
+        // Let the parent know we need load the content
+        this.props.MenuClicked(item.value);
+    }
+
     render() {
         return (
             <div className="App-leftmenu">
-                <SideMenu items={this.state.items} theme='custom' />
+                <SideMenu items={this.state.items} theme='custom' onMenuItemClick={(value) => this.MenuClicked({value})} />
             </div>
         );
     }

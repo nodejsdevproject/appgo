@@ -10,8 +10,14 @@ import $ from 'jquery';
 class App extends Component {
   constructor() {
     super();
+    this.menuClicked = this.menuClicked.bind(this);
     this.state = {
     }
+  }
+
+  // parent need notify the right content panel to update.
+  menuClicked(content) {
+    this.appRightcontent.LoadContent(content);
   }
 
   componentWillMount() {
@@ -45,8 +51,8 @@ class App extends Component {
       return (
         <div className="App">
           <AppHeader Config={this.state.appConfig} />
-          <AppLeftmenu />
-          <AppRightcontent />
+          <AppLeftmenu MenuClicked={this.menuClicked} />
+          <AppRightcontent  onRef={ref => (this.appRightcontent = ref)}/> 
           <AppFooter />
         </div>
       );
