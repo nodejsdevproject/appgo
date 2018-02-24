@@ -59,7 +59,7 @@ class App extends Component {
       return (
         <div className="App">
           <AppHeader Config={this.state.appConfig} />
-          <AppLeftmenu MenuClicked={this.menuClicked} />
+          <AppLeftmenu MenuClicked={this.menuClicked} Config={this.state.appConfig}/>
            {/* tell the child I allow you open dailog. */}
           <AppRightcontent OpenDialog={this.openDialog}  onRef={ref => (this.appRightcontent = ref)} />
           <AppFooter />
