@@ -8,7 +8,9 @@
     "popper.js": "^1.12.9",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
-    "react-scripts": "1.1.1"
+    "react-jsonschema-form": "^1.0.1",
+    "react-scripts": "1.1.1",
+    "react-sidemenu": "0.0.13"
   },
   "scripts": {
     "start": "react-scripts start",
