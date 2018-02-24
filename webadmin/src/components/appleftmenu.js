@@ -18,7 +18,7 @@ class AppLeftmenu extends Component {
     render() {
         return (
             <div className="App-leftmenu">
-                <SideMenu items={this.props.Config.leftMenuItems} theme='custom' onMenuItemClick={(value) => this.MenuClicked({value})} />
+                <SideMenu items={this.props.Config.leftMenu.items} theme='custom' onMenuItemClick={(value) => this.MenuClicked({value})} />
             </div>
         );
     }
