@@ -15,7 +15,7 @@ var userSchema = new Schema({
   },
   created_at: Date,
   updated_at: Date
-});
+}, { collection: 'user' });
 
 // custom method to add string to end of name
 // you can create more important methods like name validations or formatting
@@ -29,7 +29,7 @@ userSchema.methods.dudify = function() {
 
 // the schema is useless so far
 // we need to create a model using it
-var User = mongoose.model('User', userSchema);
+var User = mongoose.model('user', userSchema);
 
 // make this available to our users in our Node applications
 module.exports = User;

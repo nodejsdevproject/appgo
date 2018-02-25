@@ -3,11 +3,22 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import '../App.css';
 import 'bootstrap/dist/js/bootstrap.min'
 import $ from 'jquery'
+import BootstrapTable from 'react-bootstrap-table-next';
 
 class AppRightcontent extends Component {
     constructor() {
         super();
-        this.state = {}
+        this.state = {};
+        this.columns = [{
+            dataField: '_id',
+            text: 'ID'
+          }, {
+            dataField: 'name',
+            text: '姓名'
+          }, {
+            dataField: 'username',
+            text: '用户名'
+          }];
     }
 
     componentDidMount() {
@@ -17,10 +28,29 @@ class AppRightcontent extends Component {
         this.props.onRef(undefined)
     }
 
+    // The parent will pass the value in menu. Here we need figure out how to load content by the value
+    // Most of time the value will be start with api
     LoadContent(content) {
-        this.setState({ Content: content }, function () {
-            console.log("Load content done!")
-        });
+        // We need load the content base on the menu value. 
+        // The result could be array also could be single object. both of them we need a nice way to present it
+        console.log("start load content from :" + content); 
+        $.ajax({
+            url: process.env.REACT_APP_WEB_API_URL + "api/user",
+            dataTyoe: 'json',
+            cache: false,
+            crossDomain: true,
+            success: function (data) {
+              console.log("Load data done:" + data);
+              this.setState({ Content: data }, function () {
+                console.log("bind data done!");
+              });
+              // Translate the date from local.Why? We need the ability to dynamic translate. So if you change the lanauge later. 
+              // We don't need access the server by http request. That is why. 
+            }.bind(this),
+            error: function (xrh, status, err) {
+              console.log(err);
+            }
+          })
     }
 
     ItemClicked() {
@@ -31,11 +61,26 @@ class AppRightcontent extends Component {
 
     render() {
         if (this.state.Content) {
-            return (
-                <div className="App-rightcontent  bg-light">
-                    {this.state.Content}
-                </div>
-            );
+            if(Array.isArray(this.state.Content))
+            {
+                // Render as tabler
+                return(
+                    <div className="App-rightcontent  bg-light">
+                        <BootstrapTable keyField='_id' data={ this.state.Content }  columns={ this.columns } />
+                    </div>
+                );
+            }
+            else   
+            {   // Render as single object
+                return (
+                    <div className="App-rightcontent  bg-light">
+                        {this.state.Content}
+                    </div>
+                );
+            }
+
+
+           
         }
         return (
             <div className="App-rightcontent  bg-light">

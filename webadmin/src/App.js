@@ -35,21 +35,18 @@ class App extends Component {
     // hide the show dailog
     console.log("Will mount");
     $.ajax({
-      url: process.env.REACT_APP_WEB_API_URL + "api/appconfigs",
+      url: process.env.REACT_APP_WEB_API_URL + "api/appconfig",
       dataTyoe: 'json',
       cache: false,
-      crossDomain: true, 
+      crossDomain: true,
       success: function (apConfigs) {
         console.log("Load appConfig done:" + apConfigs); // Load the appConfig form server.
         this.state.appConfig = apConfigs[0];
-        
+
         // Use the default lanuage to render the page. If you pick another lanuage. you can call the follow line to change it.
         this.setState({
           appConfig: this.getTranslatedAppConfig(this.state.appConfig.defaultLanguage)
-       },
-        
- 
-        ); 
+        });
         // Translate the date from local.Why? We need the ability to dynamic translate. So if you change the lanauge later. 
         // We don't need access the server by http request. That is why. 
       }.bind(this),
@@ -64,12 +61,12 @@ class App extends Component {
   componentDidMount() {
     console.log("Mounted");
   }
-  
-  getTranslatedAppConfig = (lang) => { 
-   return translateObject(this.state.appConfig.LocalizedStrings, lang, this.state.appConfig);
+
+  getTranslatedAppConfig = (lang) => {
+    return translateObject(this.state.appConfig.LocalizedStrings, lang, this.state.appConfig);
   }
 
-  
+
   render() {
     // We get everything then start render. Idealy each compoenent shoud have it own config/model
     if (this.state.appConfig) {
@@ -78,7 +75,7 @@ class App extends Component {
           <AppHeader Config={this.state.appConfig} />
           <AppLeftmenu MenuClicked={this.menuClicked} Config={this.state.appConfig} />
           {/* tell the child I allow you open dailog. */}
-          <AppRightcontent OpenDialog={this.openDialog} onRef={ref => (this.appRightcontent = ref)} />
+          <AppRightcontent OpenDialog={this.openDialog} onRef={ref => (this.appRightcontent = ref)}  Config={this.state.appConfig} />
           <AppFooter />
           {/* I will update the content once you tell me what need dispaly. This way we only refresh the content part. */}
           <AppModalDialog onRef={ref => (this.appModalDialog = ref)} />

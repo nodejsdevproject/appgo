@@ -9,7 +9,7 @@ var accountSchema = new Schema({
   isActive: Boolean,
   createDate: Date,
   updateDate: Date
-});
+}, { collection: 'account' });
 
 // custom method to add string to end of name
 // you can create more important methods like name validations or formatting
@@ -23,7 +23,7 @@ var accountSchema = new Schema({
 
 // the schema is useless so far
 // we need to create a model using it
-var Account = mongoose.model('Account', accountSchema);
+var Account = mongoose.model('account', accountSchema);
 
 // make this available to our users in our Node applications
 module.exports = Account;

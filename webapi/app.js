@@ -18,7 +18,7 @@ var Entity = require('./models/entity')
 
 
 mongoose.connect('mongodb://sa:Test1234@76.187.69.186:3301/webadmin');
-app.get('/api/users', function (req, res) {
+app.get('/api/user', function (req, res) {
     
     User.find({}, function(err, users) {
         if (err) throw err;
@@ -28,7 +28,7 @@ app.get('/api/users', function (req, res) {
       });
 })
 
-app.get('/api/Accounts', function (req, res) {
+app.get('/api/account', function (req, res) {
     
     Account.find({}, function(err, accounts) {
         if (err) throw err;
@@ -38,8 +38,7 @@ app.get('/api/Accounts', function (req, res) {
       });
 })
 
-app.get('/api/AppConfigs', function (req, res) {
-    
+app.get('/api/appconfig', function (req, res) {
     AppConfig.find({}, function(err, appConfigs) {
         if (err) throw err;
         // object of all the users
@@ -48,7 +47,7 @@ app.get('/api/AppConfigs', function (req, res) {
       });
 })
 
-app.get('/api/Entities', function (req, res) {
+app.get('/api/entity', function (req, res) {
     
     Entity.find({}, function(err, entities) {
         if (err) throw err;
