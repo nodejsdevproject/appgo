@@ -16,7 +16,7 @@ class AppLeftmenu extends Component {
     componentWillMount()
     {   
         // overwrite the text by the LocalizedStrings
-        
+
     }
 
     MenuClicked(item)
@@ -28,7 +28,7 @@ class AppLeftmenu extends Component {
     render() {
         return (
             <div className="App-leftmenu">
-                <SideMenu items={this.props.Config.leftMenu.items} theme='custom' onMenuItemClick={(value) => this.MenuClicked({value})} />
+                <SideMenu items={this.props.UIModel.appConfig.leftMenu.items} theme='custom' onMenuItemClick={(value) => this.MenuClicked({value})} />
             </div>
         );
     }

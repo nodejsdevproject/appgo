@@ -4,21 +4,12 @@ import '../App.css';
 import 'bootstrap/dist/js/bootstrap.min'
 import $ from 'jquery'
 import BootstrapTable from 'react-bootstrap-table-next';
+import {getColumnsFromEntitySchame} from '../helper';
 
 class AppRightcontent extends Component {
     constructor() {
         super();
         this.state = {};
-        this.columns = [{
-            dataField: '_id',
-            text: 'ID'
-          }, {
-            dataField: 'name',
-            text: '姓名'
-          }, {
-            dataField: 'username',
-            text: '用户名'
-          }];
     }
 
     componentDidMount() {
@@ -34,14 +25,25 @@ class AppRightcontent extends Component {
         // We need load the content base on the menu value. 
         // The result could be array also could be single object. both of them we need a nice way to present it
         console.log("start load content from :" + content); 
+
+        if(content.startsWith("api:"))
+        {
+            this.state.url = process.env.REACT_APP_WEB_API_URL + content.replace("api:", "");
+            this.state.targetObj = content.replace("api:api/", "");
+        }
+
         $.ajax({
-            url: process.env.REACT_APP_WEB_API_URL + "api/user",
+            url: this.state.url,
             dataTyoe: 'json',
             cache: false,
             crossDomain: true,
             success: function (data) {
               console.log("Load data done:" + data);
-              this.setState({ Content: data }, function () {
+              this.setState(
+                  { 
+                      Content: data,
+                      Columns: this.getColumnsFromEntitySchame(this.props.UIModel.entitySchema, this.state.targetObj ),
+                  }, function () {
                 console.log("bind data done!");
               });
               // Translate the date from local.Why? We need the ability to dynamic translate. So if you change the lanauge later. 
@@ -53,6 +55,25 @@ class AppRightcontent extends Component {
           })
     }
 
+    getColumnsFromEntitySchame  (schames, entity)  {
+        var columns = [{
+            dataField: '_id',
+            text: '_id'
+        }];
+        for (var sch in schames) {
+            if (schames[sch].collectionName === entity) {
+                for (var prop in schames[sch].jsonSchema.properties) {
+                    columns.push({
+                        dataField: prop,
+                        text: schames[sch].jsonSchema.properties[prop].title,
+                    })
+                }
+            }
+        }
+        return columns;
+      }
+    
+
     ItemClicked() {
         console.log('this is:', this);
         // Ask the father open a dailog for me. And display 'this'.
@@ -63,10 +84,11 @@ class AppRightcontent extends Component {
         if (this.state.Content) {
             if(Array.isArray(this.state.Content))
             {
+                
                 // Render as tabler
                 return(
                     <div className="App-rightcontent  bg-light">
-                        <BootstrapTable keyField='_id' data={ this.state.Content }  columns={ this.columns } />
+                        <BootstrapTable keyField='_id' data={ this.state.Content }  columns={ this.state.Columns } />
                     </div>
                 );
             }
@@ -78,9 +100,6 @@ class AppRightcontent extends Component {
                     </div>
                 );
             }
-
-
-           
         }
         return (
             <div className="App-rightcontent  bg-light">
