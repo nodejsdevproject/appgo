@@ -6,6 +6,7 @@ var Schema = mongoose.Schema;
 var appConfigSchema = new Schema({
   appName: String,
   appLogo: String, // Store Base64 string
+  defaultLanguage: String, // The default lanuage
   // https://github.com/umarovt/react-sidemenu
   leftMenu: {
     items: {

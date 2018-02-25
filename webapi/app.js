@@ -15,7 +15,6 @@ var User = require('./models/user')
 var Account = require('./models/account')
 var AppConfig = require('./models/appconfig')
 var Entity = require('./models/entity')
-var Localize = require('./models/localize')
 
 
 mongoose.connect('mongodb://sa:Test1234@76.187.69.186:3301/webadmin');
@@ -58,17 +57,6 @@ app.get('/api/Entities', function (req, res) {
         res.json(entities)
       });
 })
-
-app.get('/api/Localizes', function (req, res) {
-    
-    Localize.find({}, function(err, localizes) {
-        if (err) throw err;
-        // object of all the entities
-        
-        res.json(localizes)
-      });
-})
-
 
 app.listen(2000)
 console.log('Started')

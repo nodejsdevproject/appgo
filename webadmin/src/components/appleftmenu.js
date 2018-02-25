@@ -9,6 +9,16 @@ class AppLeftmenu extends Component {
         this.state = {        }
     }
 
+    componentDidMount()
+    {
+    }
+
+    componentWillMount()
+    {   
+        // overwrite the text by the LocalizedStrings
+        
+    }
+
     MenuClicked(item)
     {
         // Let the parent know we need load the content
